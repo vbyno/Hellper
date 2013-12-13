@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  username:
+  password:
+
+development:
+  <<: *default
+  database: hellper_development
+
+test:
+  <<: *default
+  database: hellper_test
