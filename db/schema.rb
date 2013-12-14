@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214122444) do
+ActiveRecord::Schema.define(version: 20131214132810) do
 
   create_table "customers", force: true do |t|
     t.string   "name",       null: false
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 20131214122444) do
   end
 
   create_table "tickets", force: true do |t|
-    t.integer  "customer_id"
-    t.integer  "ticket_subject_id"
-    t.integer  "ticket_status_id"
+    t.integer  "customer_id",       null: false
+    t.integer  "ticket_subject_id", null: false
+    t.integer  "ticket_status_id",  null: false
     t.string   "reference",         null: false
     t.text     "body",              null: false
     t.datetime "created_at"

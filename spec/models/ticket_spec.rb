@@ -3,9 +3,9 @@
 # Table name: tickets
 #
 #  id                :integer          not null, primary key
-#  customer_id       :integer
-#  ticket_subject_id :integer
-#  ticket_status_id  :integer
+#  customer_id       :integer          not null
+#  ticket_subject_id :integer          not null
+#  ticket_status_id  :integer          not null
 #  reference         :string(255)      not null
 #  body              :text             not null
 #  created_at        :datetime
@@ -24,6 +24,9 @@ describe Ticket do
   it { expect(subject).to belong_to :customer }
   it { expect(subject).to belong_to(:owner).class_name('User') }
 
+  it { expect(subject).to validate_presence_of :customer }
+  it { expect(subject).to validate_presence_of :ticket_status }
+  it { expect(subject).to validate_presence_of :ticket_subject }
   it { expect(subject).to validate_presence_of :body }
   it { expect(subject).to validate_presence_of :owner }
 
