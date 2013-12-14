@@ -17,9 +17,23 @@ class Ticket < ActiveRecord::Base
   belongs_to :customer
   belongs_to :ticket_status
 
+  before_validation :set_unique_reference
+
   validates :body, presence: true
   validates :reference,
             presence: true,
             uniqueness: true,
             format: { with: TICKET_REFERENCE_REGEXP }
+
+  def set_unique_reference
+    return if self.reference.present?
+
+    reference = Guid.generate_new
+
+    if self.class.where(reference: reference).any?
+      set_unique_reference
+    else
+      self.reference = reference
+    end
+  end
 end

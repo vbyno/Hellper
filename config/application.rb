@@ -21,5 +21,7 @@ module Hellper
     config.i18n.default_locale = :en
     config.i18n.enforce_available_locales = true
     I18n.config.enforce_available_locales = true
+
+    config.autoload_paths += %W[#{Rails.root}/lib]
   end
 end
