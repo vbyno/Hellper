@@ -48,6 +48,10 @@ group :test do
   gem 'spork', '~> 1.0rc'
 end
 
+group :development do
+  gem 'mailcatcher'
+end
+
 gem 'devise'
 gem 'haml-rails'
 gem 'bootstrap-sass'

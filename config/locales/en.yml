@@ -12,3 +12,10 @@ en:
   activerecord:
     attributes:
       ticket:
+  customer_mailer:
+    ticket_created:
+      subject: Request successfully sent
+      salutation: Hello, %{name}!
+      reference: "Your request has been received. Unique referece of ticket is:"
+      text_html: "You can view your ticket history on this <a href='%{url}'>page</a>. Our staff will handle your request as soon as possible"
+      text: "You can view your ticket history on this page: %{url}. Our staff will handle your request as soon as possible"

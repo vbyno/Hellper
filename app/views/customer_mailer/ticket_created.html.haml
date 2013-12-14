@@ -1,0 +1,9 @@
+%table
+  %tr
+    %td= t('.salutation', name: @ticket.customer_name)
+  %tr
+    %td
+      = t('.reference')
+      %strong= @ticket.reference
+  %tr
+    %td= t('.text_html', url: ticket_url(@ticket))
