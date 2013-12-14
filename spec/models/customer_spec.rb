@@ -20,4 +20,10 @@ describe Customer do
   it 'validates uniquness of email' do
     expect(build :customer, email: customer.email).not_to be_valid
   end
+
+  it 'validates format of email' do
+    expect(subject).to allow_value('email@good_email.comx').for(:email)
+    expect(subject).not_to allow_value('email@ with.space').for(:email)
+    expect(subject).not_to allow_value('email').for(:email)
+  end
 end

@@ -17,6 +17,9 @@ class Ticket < ActiveRecord::Base
   belongs_to :customer
   belongs_to :ticket_status
 
-  validates :reference, :body, presence: true
-  # TODO validate format of reference
+  validates :body, presence: true
+  validates :reference,
+            presence: true,
+            uniqueness: true,
+            format: { with: TICKET_REFERENCE_REGEXP }
 end
