@@ -11,5 +11,7 @@
 
 class Customer < ActiveRecord::Base
   validates :name, :email, presence: true
-  validates :email, uniqueness: true #TODO email regexp
+  validates :email,
+            uniqueness: true,
+            format: { with: Devise.email_regexp }
 end
