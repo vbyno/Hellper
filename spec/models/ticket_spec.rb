@@ -3,14 +3,15 @@
 # Table name: tickets
 #
 #  id                :integer          not null, primary key
-#  customer_id       :integer          not null
 #  ticket_subject_id :integer          not null
 #  ticket_status_id  :integer          not null
 #  reference         :string(255)      not null
 #  body              :text             not null
 #  created_at        :datetime
 #  updated_at        :datetime
-#  owner_id          :integer          not null
+#  owner_id          :integer
+#  customer_name     :string(255)      not null
+#  customer_email    :string(255)      not null
 #
 
 require 'spec_helper'
@@ -21,14 +22,19 @@ describe Ticket do
 
   it { expect(subject).to belong_to :ticket_subject }
   it { expect(subject).to belong_to :ticket_status }
-  it { expect(subject).to belong_to :customer }
   it { expect(subject).to belong_to(:owner).class_name('User') }
 
-  it { expect(subject).to validate_presence_of :customer }
+  it { expect(subject).to validate_presence_of :customer_name }
+  it { expect(subject).to validate_presence_of :customer_email }
   it { expect(subject).to validate_presence_of :ticket_status }
   it { expect(subject).to validate_presence_of :ticket_subject }
   it { expect(subject).to validate_presence_of :body }
-  it { expect(subject).to validate_presence_of :owner }
+
+  it 'validates format of email' do
+    expect(subject).to allow_value('email@good_email.comx').for(:customer_email)
+    expect(subject).not_to allow_value('email@ with.space').for(:customer_email)
+    expect(subject).not_to allow_value('email').for(:customer_email)
+  end
 
   context 'reference' do
     it 'assigns reference before validation' do
