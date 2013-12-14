@@ -10,6 +10,7 @@
 #  body              :text             not null
 #  created_at        :datetime
 #  updated_at        :datetime
+#  owner_id          :integer          not null
 #
 
 require 'spec_helper'
@@ -21,8 +22,10 @@ describe Ticket do
   it { expect(subject).to belong_to :ticket_subject }
   it { expect(subject).to belong_to :ticket_status }
   it { expect(subject).to belong_to :customer }
+  it { expect(subject).to belong_to(:owner).class_name('User') }
 
   it { expect(subject).to validate_presence_of :body }
+  it { expect(subject).to validate_presence_of :owner }
 
   context 'reference' do
     it 'assigns reference before validation' do
@@ -32,7 +35,7 @@ describe Ticket do
       expect(ticket.reference).not_to be_nil
     end
 
-    it 'validates format og reference' do
+    it 'validates format of reference' do
       expect(subject).to allow_value(valid_reference).for(:reference)
       expect(subject).not_to allow_value('ABC-123-ABC-123-123').for(:reference)
       expect(subject).not_to allow_value('ABC').for(:reference)

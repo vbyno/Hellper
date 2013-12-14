@@ -10,16 +10,18 @@
 #  body              :text             not null
 #  created_at        :datetime
 #  updated_at        :datetime
+#  owner_id          :integer          not null
 #
 
 class Ticket < ActiveRecord::Base
   belongs_to :ticket_subject
   belongs_to :customer
   belongs_to :ticket_status
+  belongs_to :owner, class_name: User
 
   before_validation :set_unique_reference
 
-  validates :body, presence: true
+  validates :body, :owner, presence: true
   validates :reference,
             presence: true,
             uniqueness: true,
