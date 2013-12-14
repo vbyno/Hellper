@@ -19,7 +19,11 @@ class Ticket < ActiveRecord::Base
   belongs_to :ticket_status
   belongs_to :owner, class_name: User
 
+  delegate :status, to: :ticket_status, prefix: false
+  delegate :subject, to: :ticket_subject, prefix: false
+
   before_validation :set_unique_reference
+  before_validation :set_ticket_status
 
   validates :body, :ticket_subject, :ticket_status, :customer_name, presence: true
   validates :reference,
@@ -28,9 +32,9 @@ class Ticket < ActiveRecord::Base
             format: { with: TICKET_REFERENCE_REGEXP }
   validates :customer_email, presence: true, format: { with: Devise.email_regexp }
 
+private
   def set_unique_reference
     return if self.reference.present?
-
     reference = Guid.generate_new
 
     if self.class.where(reference: reference).any?
@@ -38,5 +42,10 @@ class Ticket < ActiveRecord::Base
     else
       self.reference = reference
     end
+  end
+
+  def set_ticket_status
+    return if self.ticket_status
+    self.ticket_status = TicketStatus.default_ticket_status
   end
 end

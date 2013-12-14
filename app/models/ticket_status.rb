@@ -9,5 +9,11 @@
 #
 
 class TicketStatus < ActiveRecord::Base
-  validates :status, presence: true
+  DEFAULT = 'Waiting for Staff Response'
+
+  validates :status, presence: true, uniqueness: true
+
+  def self.default_ticket_status
+    find_by(status: DEFAULT)
+  end
 end

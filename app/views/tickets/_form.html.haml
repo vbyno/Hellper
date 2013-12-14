@@ -1,7 +1,11 @@
 = semantic_form_for @ticket do |f|
   = f.semantic_errors
   = f.inputs do
+    = f.input :ticket_subject,
+              collection: TicketSubject.all.map { |t| [t.subject, t.id] }
     = f.input :body, input_html: { rows: 10, cols: 50 }
+    = f.input :customer_name
+    = f.input :customer_email
   %br
   = f.actions do
     = f.submit 'Send Ticket', class: 'btn btn-big btn-success'
