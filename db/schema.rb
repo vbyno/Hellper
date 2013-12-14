@@ -11,6 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20131214013845) do
+
+  create_table "customers", force: true do |t|
+    t.string   "name",       null: false
+    t.string   "email",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ticket_statuses", force: true do |t|
+    t.string   "status",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ticket_subjects", force: true do |t|
+    t.string   "subject",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tickets", force: true do |t|
+    t.integer  "customer_id"
+    t.integer  "ticket_subject_id"
+    t.integer  "ticket_status_id"
+    t.string   "reference",         null: false
+    t.text     "body",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tickets", ["customer_id"], name: "index_tickets_on_customer_id", using: :btree
+  add_index "tickets", ["ticket_status_id"], name: "index_tickets_on_ticket_status_id", using: :btree
+  add_index "tickets", ["ticket_subject_id"], name: "index_tickets_on_ticket_subject_id", using: :btree
 
 end
