@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214005036) do
+ActiveRecord::Schema.define(version: 20131214012037) do
+
+  create_table "customers", force: true do |t|
+    t.string   "name",       null: false
+    t.string   "email",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ticket_statuses", force: true do |t|
     t.string   "status",     null: false
