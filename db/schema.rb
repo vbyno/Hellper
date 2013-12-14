@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214013845) do
+ActiveRecord::Schema.define(version: 20131214135049) do
 
   create_table "customers", force: true do |t|
     t.string   "name",       null: false
@@ -19,6 +19,32 @@ ActiveRecord::Schema.define(version: 20131214013845) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "replies", force: true do |t|
+    t.text     "body",       null: false
+    t.integer  "user_id",    null: false
+    t.integer  "ticket_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id", using: :btree
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
+
+  create_table "staff", force: true do |t|
+    t.string   "username",            default: "", null: false
+    t.string   "encrypted_password",  default: "", null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "staff", ["username"], name: "index_staff_on_username", unique: true, using: :btree
 
   create_table "ticket_statuses", force: true do |t|
     t.string   "status",     null: false
@@ -33,16 +59,18 @@ ActiveRecord::Schema.define(version: 20131214013845) do
   end
 
   create_table "tickets", force: true do |t|
-    t.integer  "customer_id"
-    t.integer  "ticket_subject_id"
-    t.integer  "ticket_status_id"
+    t.integer  "customer_id",       null: false
+    t.integer  "ticket_subject_id", null: false
+    t.integer  "ticket_status_id",  null: false
     t.string   "reference",         null: false
     t.text     "body",              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id",          null: false
   end
 
   add_index "tickets", ["customer_id"], name: "index_tickets_on_customer_id", using: :btree
+  add_index "tickets", ["owner_id"], name: "index_tickets_on_owner_id", using: :btree
   add_index "tickets", ["ticket_status_id"], name: "index_tickets_on_ticket_status_id", using: :btree
   add_index "tickets", ["ticket_subject_id"], name: "index_tickets_on_ticket_subject_id", using: :btree
 

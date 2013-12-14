@@ -3,13 +3,14 @@
 # Table name: tickets
 #
 #  id                :integer          not null, primary key
-#  customer_id       :integer
-#  ticket_subject_id :integer
-#  ticket_status_id  :integer
+#  customer_id       :integer          not null
+#  ticket_subject_id :integer          not null
+#  ticket_status_id  :integer          not null
 #  reference         :string(255)      not null
 #  body              :text             not null
 #  created_at        :datetime
 #  updated_at        :datetime
+#  owner_id          :integer          not null
 #
 
 require 'spec_helper'
@@ -21,8 +22,13 @@ describe Ticket do
   it { expect(subject).to belong_to :ticket_subject }
   it { expect(subject).to belong_to :ticket_status }
   it { expect(subject).to belong_to :customer }
+  it { expect(subject).to belong_to(:owner).class_name('User') }
 
+  it { expect(subject).to validate_presence_of :customer }
+  it { expect(subject).to validate_presence_of :ticket_status }
+  it { expect(subject).to validate_presence_of :ticket_subject }
   it { expect(subject).to validate_presence_of :body }
+  it { expect(subject).to validate_presence_of :owner }
 
   context 'reference' do
     it 'assigns reference before validation' do
@@ -32,7 +38,7 @@ describe Ticket do
       expect(ticket.reference).not_to be_nil
     end
 
-    it 'validates format og reference' do
+    it 'validates format of reference' do
       expect(subject).to allow_value(valid_reference).for(:reference)
       expect(subject).not_to allow_value('ABC-123-ABC-123-123').for(:reference)
       expect(subject).not_to allow_value('ABC').for(:reference)
