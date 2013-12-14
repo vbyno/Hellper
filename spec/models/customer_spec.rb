@@ -12,7 +12,12 @@
 require 'spec_helper'
 
 describe Customer do
+  let(:customer) { create :customer }
+
   it { expect(subject).to validate_presence_of :name }
   it { expect(subject).to validate_presence_of :email }
-  it { expect(subject).to validate_uniqueness_of :email }
+
+  it 'validates uniquness of email' do
+    expect(build :customer, email: customer.email).not_to be_valid
+  end
 end
