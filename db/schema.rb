@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214013845) do
+ActiveRecord::Schema.define(version: 20131214115637) do
 
   create_table "customers", force: true do |t|
     t.string   "name",       null: false
@@ -19,6 +19,21 @@ ActiveRecord::Schema.define(version: 20131214013845) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "staff", force: true do |t|
+    t.string   "username",            default: "", null: false
+    t.string   "encrypted_password",  default: "", null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "staff", ["username"], name: "index_staff_on_username", unique: true, using: :btree
 
   create_table "ticket_statuses", force: true do |t|
     t.string   "status",     null: false
