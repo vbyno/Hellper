@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214132810) do
+ActiveRecord::Schema.define(version: 20131214135049) do
 
   create_table "customers", force: true do |t|
     t.string   "name",       null: false
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 20131214132810) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "replies", force: true do |t|
+    t.text     "body",       null: false
+    t.integer  "user_id",    null: false
+    t.integer  "ticket_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id", using: :btree
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "staff", force: true do |t|
     t.string   "username",            default: "", null: false
