@@ -12,7 +12,7 @@ class Staff::TicketsController < ApplicationController
   def update
     if @ticket.update(ticket_params)
       redirect_to staff_tickets_path, notice: 'Ticket was successfully updated.'
-      # CustomerMailer.ticket_updated(@ticket).deliver
+      CustomerMailer.ticket_updated(@ticket).deliver
     else
       render action: 'edit'
     end
