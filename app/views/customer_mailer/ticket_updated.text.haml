@@ -1,0 +1,4 @@
+= t('.salutation', name: @ticket.customer_name)
+#{t('.reference')} #{@ticket.reference}
+#{t('.status')} #{@ticket.status}
+= t('.text', url: ticket_url(@ticket))

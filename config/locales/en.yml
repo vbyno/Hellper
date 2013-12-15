@@ -12,10 +12,18 @@ en:
   customer_mailer:
     ticket_created:
       subject: Request successfully sent
-      salutation: Hello, %{name}!
+      salutation: &customer_mailer_salutation
+        Hello, %{name}!
       reference: "Your request has been received. Unique referece of ticket is:"
       text_html: "You can view your ticket history on this <a href='%{url}'>page</a>. Our staff will handle your request as soon as possible"
       text: "You can view your ticket history on this page: %{url}. Our staff will handle your request as soon as possible"
+    ticket_updated:
+      subject: Your request has been updated
+      salutation: *customer_mailer_salutation
+      reference: "Request referece:"
+      status: "Your request has been updated. New status:"
+      text_html: "<a href='%{url}'>View Ticket History</a>"
+      text: "You can view ticket history on this page: %{url}."
   tickets:
     new:
       cta: "Leave the Ticket and We'll gonna HELLp you! =)"
