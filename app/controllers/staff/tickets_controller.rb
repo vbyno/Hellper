@@ -1,7 +1,7 @@
 class Staff::TicketsController < ApplicationController
-  authorize_resource exept: :index
-  load_resource only: [:edit, :update]
+  load_and_authorize_resource exept: :index
   before_filter :can_view_ticket_list?, only: :index
+  respond_to :js, only: :update
 
   def index
     @tickets = Ticket.includes(:ticket_subject, :ticket_status)
@@ -11,8 +11,9 @@ class Staff::TicketsController < ApplicationController
 
   def update
     if @ticket.update(ticket_params)
-      redirect_to staff_tickets_path, notice: 'Ticket was successfully updated.'
       CustomerMailer.ticket_updated(@ticket).deliver
+      @reply = @ticket.replies.last
+      # redirect_to staff_tickets_path, notice: 'Ticket was successfully updated.'
     else
       render action: 'edit'
     end

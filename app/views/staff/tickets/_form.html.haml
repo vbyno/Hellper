@@ -1,9 +1,4 @@
-%p= @ticket.customer_name
-%p= @ticket.body
-%p= @ticket.status
-%p= @ticket.subject
-
-= semantic_form_for(@ticket, url: staff_ticket_path(@ticket)) do |f|
+= semantic_form_for(@ticket, url: staff_ticket_path(@ticket), method: 'put', remote: true) do |f|
   = f.semantic_errors
   = f.inputs do
     = f.input :ticket_status,
