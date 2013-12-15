@@ -1,0 +1,15 @@
+development:
+  email:
+    default_host: 'localhost:3000'
+    default_protocol: 'http'
+    delivery_method: :smtp
+    address: 'localhost'
+    port: 1025
+    customer_notification_email_address: 'from@example.com'
+
+test:
+  email:
+    default_host: 'localhost:3000'
+    default_protocol: 'http'
+    delivery_method: :test
+    customer_notification_email_address: 'from@example.com'

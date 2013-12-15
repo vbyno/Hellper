@@ -1,23 +1,29 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  head:
+    main_page_title: Hellper =)
+    description: Leave the Ticket and We Will Handle It!
+    keywords: ticket issue tracker
+  layouts:
+    navigation:
+      brand: Hellper
+  activerecord:
+    attributes:
+      ticket:
+  customer_mailer:
+    ticket_created:
+      subject: Request successfully sent
+      salutation: Hello, %{name}!
+      reference: "Your request has been received. Unique referece of ticket is:"
+      text_html: "You can view your ticket history on this <a href='%{url}'>page</a>. Our staff will handle your request as soon as possible"
+      text: "You can view your ticket history on this page: %{url}. Our staff will handle your request as soon as possible"
+  tickets:
+    new:
+      cta: "Leave the Ticket and We'll gonna HELLp you! =)"
+  staff:
+    tickets:
+      index:
+        headline: All Tickets
+        edit_link: Edit Link
+        customer_name: Customer Name
+        status: Status
+        subject: Subject

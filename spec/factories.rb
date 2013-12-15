@@ -7,16 +7,12 @@ FactoryGirl.define do
     sequence(:subject) { |n| "Ticket Subject #{n}" }
   end
 
-  factory :customer do
-    sequence(:email) { |n| "customer_#{n}@email.comx" }
-    name 'John Smith'
-  end
-
   factory :ticket do
     association :ticket_status
     association :ticket_subject
-    association :customer
     association :owner, factory: :user
+    customer_name 'John Smith'
+    customer_email 'customer@email.comx'
     body 'Ticket Body'
     sequence(:reference) { |n| "ABC-123-ABC-#{100+n}-ABC" }
   end

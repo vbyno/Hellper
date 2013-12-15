@@ -1,0 +1,15 @@
+%h1.text-center= t('.headline')
+
+%table.table.table-striped
+  %tr
+    %th= t('.edit_link')
+    %th= t('.customer_name')
+    %th= t('.status')
+    %th= t('.subject')
+
+  - @tickets.each do |ticket|
+    %tr
+      %td= link_to ticket.reference, edit_staff_ticket_path(ticket)
+      %td= ticket.customer_name
+      %td= ticket.status
+      %td= ticket.subject

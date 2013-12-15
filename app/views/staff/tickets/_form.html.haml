@@ -1,0 +1,14 @@
+%p= @ticket.customer_name
+%p= @ticket.body
+%p= @ticket.status
+%p= @ticket.subject
+
+= semantic_form_for(@ticket, url: staff_ticket_path(@ticket)) do |f|
+  = f.semantic_errors
+  = f.inputs do
+    = f.input :ticket_status,
+              collection: TicketStatus.all.map { |t| [t.status, t.id] }
+  = f.semantic_fields_for :replies, @ticket.replies.build do |r|
+    = r.input :body, input_html: { rows: 5, cols: 50 }
+  = f.actions do
+    = f.submit 'Save', class: 'btn btn-big btn-success'

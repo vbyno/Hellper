@@ -48,15 +48,19 @@ group :test do
   gem 'spork', '~> 1.0rc'
 end
 
+group :development do
+  gem 'mailcatcher'
+end
+
 gem 'devise'
 gem 'haml-rails'
-gem 'bootstrap-sass'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 gem 'sanitize'
 gem 'cancan'
-gem 'formtastic-bootstrap', github: 'mjbellantoni/formtastic-bootstrap'
+gem 'formtastic-bootstrap'
 gem 'annotate'
 gem 'jquery-turbolinks'
-gem 'font-awesome-sass-rails'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'rails-i18n', '~> 4.0.0'
 
