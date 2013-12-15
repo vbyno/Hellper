@@ -1,1 +1,11 @@
-= render 'form'
+%p= @ticket.customer_name
+%p= @ticket.body
+%p= @ticket.status
+%p= @ticket.subject
+
+#edit_ticket
+  = render 'form'
+
+%h2 Replies:
+#replies
+  = render(@ticket.replies.existing_in_desc)

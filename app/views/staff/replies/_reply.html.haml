@@ -1,0 +1,5 @@
+.row
+  .span2.text-right.break-word
+    %strong= reply.user.try(:username)
+  .span7
+    %p.spacer= reply.body

@@ -14,5 +14,9 @@ class Reply < ActiveRecord::Base
   belongs_to :user
   belongs_to :ticket
 
+  scope :existing_in_desc, -> { where.not(id: nil)
+                                  .order('created_at DESC')
+                                  .includes(:user) }
+
   validates :user, :ticket, :body, presence: true
 end
