@@ -9,4 +9,5 @@ namespace :db do
   end
 
   TicketStatus.create!(status: TicketStatus::DEFAULT)
+  User.create!(username: 'vbyno', password: 'hellper')
 end

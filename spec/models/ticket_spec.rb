@@ -25,6 +25,8 @@ describe Ticket do
   it { expect(subject).to belong_to :ticket_subject }
   it { expect(subject).to belong_to :ticket_status }
   it { expect(subject).to belong_to(:owner).class_name('User') }
+  it { expect(subject).to have_many :replies }
+  it { expect(subject).to accept_nested_attributes_for :replies }
 
   it { expect(subject).to validate_presence_of :customer_name }
   it { expect(subject).to validate_presence_of :customer_email }

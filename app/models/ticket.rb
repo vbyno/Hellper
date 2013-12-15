@@ -18,6 +18,8 @@ class Ticket < ActiveRecord::Base
   belongs_to :ticket_subject
   belongs_to :ticket_status
   belongs_to :owner, class_name: User
+  has_many :replies
+  accepts_nested_attributes_for :replies
 
   delegate :status, to: :ticket_status, prefix: false
   delegate :subject, to: :ticket_subject, prefix: false

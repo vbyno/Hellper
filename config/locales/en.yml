@@ -6,9 +6,6 @@ en:
   layouts:
     navigation:
       brand: Hellper
-  tickets:
-    new:
-      cta: "Leave the Ticket and We'll gonna HELLp you! =)"
   activerecord:
     attributes:
       ticket:
@@ -19,3 +16,14 @@ en:
       reference: "Your request has been received. Unique referece of ticket is:"
       text_html: "You can view your ticket history on this <a href='%{url}'>page</a>. Our staff will handle your request as soon as possible"
       text: "You can view your ticket history on this page: %{url}. Our staff will handle your request as soon as possible"
+  tickets:
+    new:
+      cta: "Leave the Ticket and We'll gonna HELLp you! =)"
+  staff:
+    tickets:
+      index:
+        headline: All Tickets
+        edit_link: Edit Link
+        customer_name: Customer Name
+        status: Status
+        subject: Subject

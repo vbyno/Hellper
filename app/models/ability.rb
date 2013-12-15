@@ -5,6 +5,7 @@ class Ability
     can :read, :all
     if user
       can :update, Ticket
+      can :read, :ticket_list
     else
       can :create, Ticket
     end

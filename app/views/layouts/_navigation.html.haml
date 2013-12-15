@@ -1,1 +1,10 @@
 = link_to t('.brand'), root_path, class: 'brand'
+%ul.nav.pull-right
+  - if user_signed_in?
+    %li
+      .navbar-text
+        Logged in as
+        %strong= current_user.username
+    %li= link_to 'Log out', destroy_user_session_path, method: :delete
+  - else
+    %li= link_to 'Log in', new_user_session_path

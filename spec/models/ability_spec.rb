@@ -16,6 +16,10 @@ describe Ability do
 
     it_behaves_like 'it can read all'
 
+    it 'is able to edit tickets' do
+      expect(subject).to be_able_to(:edit, Ticket)
+    end
+
     it 'is able to update tickets' do
       expect(subject).to be_able_to(:update, Ticket)
     end

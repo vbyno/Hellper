@@ -1,7 +1,9 @@
 class TicketsController < ApplicationController
-  def new
-    @ticket = Ticket.new
-  end
+  load_resource only: [:new, :show]
+  authorize_resource only: :create
+
+  def new; end
+  def show; end
 
   def create
     @ticket = Ticket.new(ticket_params)
@@ -13,8 +15,6 @@ class TicketsController < ApplicationController
       render action: 'new'
     end
   end
-
-  def show; end
 
 private
   def ticket_params
