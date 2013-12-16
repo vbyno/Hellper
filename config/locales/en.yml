@@ -31,7 +31,8 @@ en:
     tickets:
       index:
         headline: All Tickets
-        edit_link: Edit Link
         customer_name: Customer Name
         status: Status
         subject: Subject
+        reference: Reference
+        body: Text

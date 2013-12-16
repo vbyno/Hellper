@@ -1,11 +1,25 @@
 %h1.text-center= t('.headline')
 
+.row
+  .span12
+    %form.form-inline.pull-right{action: staff_tickets_path, method: :get}
+      = label_tag= t('.reference')
+      = text_field_tag :reference, params[:reference]
+      = label_tag= t('.status')
+      = select_tag :status, options_from_collection_for_select(TicketStatus.all, :id, :status, selected: params[:status]), prompt: 'All'
+      = label_tag= t('.subject')
+      = select_tag :subject, options_from_collection_for_select(TicketSubject.all, :id, :subject, selected: params[:subject]), prompt: 'All'
+      = label_tag= t('.body')
+      = text_field_tag :body, params[:body]
+      = submit_tag 'Search', class: 'btn btn-primary', name: nil
+
 %table.table.table-striped
   %tr
-    %th= t('.edit_link')
+    %th= t('.reference')
     %th= t('.customer_name')
     %th= t('.status')
     %th= t('.subject')
+    %th= t('.body')
 
   - @tickets.each do |ticket|
     %tr
@@ -13,3 +27,4 @@
       %td= ticket.customer_name
       %td= ticket.status
       %td= ticket.subject
+      %td= truncate(ticket.body)
