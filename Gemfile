@@ -36,6 +36,7 @@ group :test, :development do
   gem 'quiet_assets'
   gem 'pry-rails'
   gem 'thin'
+  gem 'selenium-webdriver'
 end
 
 group :test do
