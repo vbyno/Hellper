@@ -5,7 +5,7 @@ class Staff::TicketsController < ApplicationController
   def index
     authorize! :read, :ticket_list
 
-    [:subject, :reference, :body].each do |attribute|
+    [:status, :subject, :reference, :body].each do |attribute|
       if params[attribute].present?
         @tickets = @tickets.public_send("search_by_#{attribute}", params[attribute])
       end

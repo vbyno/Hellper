@@ -5,6 +5,8 @@
     %form.form-inline.pull-right{action: staff_tickets_path, method: :get}
       = label_tag= t('.reference')
       = text_field_tag :reference, params[:reference]
+      = label_tag= t('.status')
+      = select_tag :status, options_from_collection_for_select(TicketStatus.all, :id, :status, selected: params[:status]), prompt: 'All'
       = label_tag= t('.subject')
       = select_tag :subject, options_from_collection_for_select(TicketSubject.all, :id, :subject, selected: params[:subject]), prompt: 'All'
       = label_tag= t('.body')

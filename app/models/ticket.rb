@@ -24,6 +24,9 @@ class Ticket < ActiveRecord::Base
   delegate :status, to: :ticket_status, prefix: false
   delegate :subject, to: :ticket_subject, prefix: false
 
+  scope :search_by_status, ->(ticket_status_id) {
+    where(ticket_status_id: ticket_status_id)
+  }
   scope :search_by_subject, ->(ticket_subject_id) {
     where(ticket_subject_id: ticket_subject_id)
   }
