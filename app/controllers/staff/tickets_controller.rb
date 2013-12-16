@@ -23,6 +23,7 @@ private
     params[:ticket][:replies_attributes]['0'].merge!({ user_id: current_user.id })
     params.require(:ticket).permit(
       :ticket_status_id,
+      :owner_id,
       replies_attributes: [:id, :body, :user_id, :ticket_id]
     )
   end

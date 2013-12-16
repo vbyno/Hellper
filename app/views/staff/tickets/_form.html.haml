@@ -1,8 +1,8 @@
 = semantic_form_for(@ticket, url: staff_ticket_path(@ticket), method: 'put', remote: true) do |f|
   = f.semantic_errors
   = f.inputs do
-    = f.input :ticket_status,
-              collection: TicketStatus.all.map { |t| [t.status, t.id] }
+    = f.input :ticket_status, collection: TicketStatus.all.map { |t| [t.status, t.id] }
+    = f.input :owner, collection: User.all.map { |u| [u.username, u.id] }
   = f.semantic_fields_for :replies, @ticket.replies.build do |r|
     = r.input :body, input_html: { rows: 5, cols: 50 }
   = f.actions do
