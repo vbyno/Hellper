@@ -1,10 +1,17 @@
 class Staff::TicketsController < ApplicationController
-  load_and_authorize_resource exept: :index
+  load_and_authorize_resource
   respond_to :js, only: :update
 
   def index
     authorize! :read, :ticket_list
-    @tickets = Ticket.includes(:ticket_subject, :ticket_status)
+
+    [:subject, :reference, :body].each do |attribute|
+      if params[attribute].present?
+        @tickets = @tickets.public_send("search_by_#{attribute}", params[attribute])
+      end
+    end
+
+    @tickets = @tickets.includes(:ticket_subject, :ticket_status)
   end
 
   def edit; end

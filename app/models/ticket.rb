@@ -24,6 +24,16 @@ class Ticket < ActiveRecord::Base
   delegate :status, to: :ticket_status, prefix: false
   delegate :subject, to: :ticket_subject, prefix: false
 
+  scope :search_by_subject, ->(ticket_subject_id) {
+    where(ticket_subject_id: ticket_subject_id)
+  }
+  scope :search_by_reference, ->(reference_query) {
+    where("reference LIKE ?", "%#{reference_query.upcase}%")
+  }
+  scope :search_by_body, ->(body_query) {
+    where("lower(body) LIKE ?", "%#{body_query.downcase}%")
+  }
+
   before_validation :set_unique_reference
   before_validation :set_ticket_status
 
