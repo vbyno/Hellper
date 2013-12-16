@@ -6,9 +6,6 @@ en:
   layouts:
     navigation:
       brand: Hellper
-  activerecord:
-    attributes:
-      ticket:
   customer_mailer:
     ticket_created:
       subject: Request successfully sent
@@ -26,7 +23,7 @@ en:
       text: "You can view ticket history on this page: %{url}."
   tickets:
     new:
-      cta: "Leave the Ticket and We'll gonna HELLp you! =)"
+      cta: Leave your request
   staff:
     tickets:
       index:
