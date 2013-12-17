@@ -1,15 +1,21 @@
-development:
-  email:
+default:
+  email: &email
     default_host: 'localhost:3000'
     default_protocol: 'http'
+    customer_notification_email_address: 'from@example.com'
+  secret_key_base: &secret_key_base
+    'some_secret_key'
+
+development:
+  email:
+    << *email
     delivery_method: :smtp
     address: 'localhost'
     port: 1025
-    customer_notification_email_address: 'from@example.com'
+  secret_key_base: *secret_key_base
 
 test:
   email:
-    default_host: 'localhost:3000'
-    default_protocol: 'http'
+    << *email
     delivery_method: :test
-    customer_notification_email_address: 'from@example.com'
+  secret_key_base: *secret_key_base

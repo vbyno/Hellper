@@ -10,6 +10,7 @@ module Hellper
   class Application < Rails::Application
     # Load up all of the environment specific configuration values to be used
     application_config = YAML.load_file(Rails.root.join('config', 'application.yml'))[Rails.env]
+    config.secret_key_base = application_config['secret_key_base']
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
