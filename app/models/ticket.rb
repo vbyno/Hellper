@@ -37,8 +37,8 @@ class Ticket < ActiveRecord::Base
     where("lower(body) LIKE ?", "%#{body_query.downcase}%")
   }
 
-  before_validation :set_unique_reference
-  before_validation :set_ticket_status
+  before_validation :set_unique_reference, on: :create
+  before_validation :set_ticket_status, on: :create
 
   validates :body, :ticket_subject, :ticket_status, :customer_name, presence: true
   validates :reference,

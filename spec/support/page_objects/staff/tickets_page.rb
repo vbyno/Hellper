@@ -1,3 +1,6 @@
+require 'support/page_objects/basic_page.rb'
+# TODO way of files load
+
 class Staff::TicketsPage < BasicPage
   def initialize
     @content = 'All Tickets'
