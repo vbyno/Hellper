@@ -50,13 +50,12 @@ class Ticket < ActiveRecord::Base
 private
   def set_unique_reference
     return if self.reference.present?
-    reference = Guid.generate_new
 
-    if self.class.where(reference: reference).any?
-      set_unique_reference
-    else
-      self.reference = reference
+    reference = Guid.generate_new
+    while self.class.where(reference: reference).any? do
+      reference = Guid.generate_new
     end
+    self.reference = reference
   end
 
   def set_ticket_status
